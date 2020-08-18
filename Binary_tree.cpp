@@ -1,55 +1,56 @@
 #include"Binary_tree.h"
 #include<iostream>
 using namespace std;
-template<typename T>
-Binary_tree<T>::Binary_tree(){
+
+
+Binary_tree::Binary_tree(){
     root = 0;
 }
-template<typename T>
-Binary_tree<T>::Binary_tree(Node<T> *root_node){
-    root = *root_node;
+
+Binary_tree::Binary_tree(Node *root_node){
+    root = root_node;
     root_node->p = 0;
     root_node->left = 0;
     root_node->right = 0;
 }
-template<typename T>
-void Binary_tree<T>::Inorder_tree_walk(Node<T> *x){
+
+void Binary_tree::Inorder_tree_walk(Node *x){
     if(x != 0){
         Inorder_tree_walk(x->left);
         cout<<x->key<<" ";
         Inorder_tree_walk(x->right);
     }
-    
 }
-template<typename T>
-void Binary_tree<T>::Preorder_tree_walk(Node<T> *x){
-    cout<<x->key<<" ";
+
+void Binary_tree::Preorder_tree_walk(Node *x){
+    
     if(x!=0){
+        cout<<x->key<<" ";
         Preorder_tree_walk(x->left);
         Preorder_tree_walk(x->right);
     }
 }
-template<typename T>
-void Binary_tree<T>::Postorder_tree_walk(Node<T> *x){
+
+void Binary_tree::Postorder_tree_walk(Node *x){
     if(x!=0){
         Postorder_tree_walk(x->left);
         Postorder_tree_walk(x->right);
         cout<<x->key<<" ";
     }
 }
-template<typename T>
-Node<T>* Binary_tree<T>::Tree_search(Node<T> *x, T k){
-    if(x != 0 || k == x->key){
+
+Node* Binary_tree::Tree_search(Node *x, int k){
+    if(x == 0 || k == x->key){
         return x;
     }
     if(k < x->key){
-        return Tree_search(x->left[x],k);
+        return Tree_search(x->left,k);
     }else{
         return Tree_search(x->right, k);
     }
 }
-template<typename T>
-Node<T>* Binary_tree<T>::Iterative_search(Node<T> *x, T k){
+
+Node* Binary_tree::Iterative_search(Node *x, int k){
     while(x != 0 || k != x->key){
         if(k < x->key){
             x = x->left;
@@ -59,48 +60,51 @@ Node<T>* Binary_tree<T>::Iterative_search(Node<T> *x, T k){
     }
     return x;
 }
-template<typename T>
-Node<T>* Binary_tree<T>::Tree_minimum(Node<T> *x){
+
+Node* Binary_tree::Tree_minimum(Node *x){
     while(x->left != 0){
         x = x->left;
     }
-    return 0;
+
+    cout<<x->key<<endl;
+    return x;
 }
-template<typename T>
-Node<T>* Binary_tree<T>::Tree_maximum(Node<T> *x){
-    while(x->left != 0){
+
+Node* Binary_tree::Tree_maximum(Node *x){
+    while(x->right != 0){
         x = x->right;
     }
-    return 0;
+    return x;
 }
-template<typename T>
-Node<T>* Binary_tree<T>::Tree_successor(Node<T> *x){
+
+Node* Binary_tree::Tree_successor(Node *x){
     if(x->right != 0){
-        return Tree_successor(x->right);
+        return Tree_minimum(x->right);
     }
-    Node<T>* y = x->p;
+    Node* y = x->p;
+    Node *r = root->p;
     while(y != 0 && x == y->right){
         x = y;
         y = y->p;
     }
     return y;
 }
-template<typename T>
-Node<T>* Binary_tree<T>::Tree_predeccessor(Node<T> *x){
+
+Node* Binary_tree::Tree_predeccessor(Node *x){
     if(x->left != 0){
-        return Tree_Predeccessor(x->left);
+        return Tree_maximum(x->left);
     }
-    Node<T>* y = x->p;
+    Node* y = x->p;
     while(y != 0 && x == y->left){
         x = y;
         y = y->p;
     }
     return y;
 }
-template<typename T>
-void Binary_tree<T>::Insert(Node<T> *z){
-    Node<T> *y = 0;
-    Node<T> *x = root;
+
+void Binary_tree::Insert(Node *z){
+    Node *y = 0;
+    Node *x = root;
     while (x != 0){
         y = x;
         if(z->key < x->key){
@@ -118,9 +122,9 @@ void Binary_tree<T>::Insert(Node<T> *z){
         y->right = z;
     }
 }
-template<typename T>
-Node<T>* Binary_tree<T>::Delete(Node<T> *z){
-    Node<T> *y, *x;
+
+Node* Binary_tree::Delete(Node *z){
+    Node *y, *x;
     if(z->left == 0 || z->right == 0){
         y = z;
     }else{

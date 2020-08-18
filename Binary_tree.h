@@ -3,31 +3,37 @@
 #include<iostream>
 using namespace std;
 
-template<typename T>
-struct Node{
-    T key;
-    Node *p;
-    Node *left;
-    Node *right;
+
+class Node{
+public:
+    Node(){
+        p = 0;
+        left = 0;
+        right = 0;
+    };
+    int key;
+    Node *p ;
+    Node *left ;
+    Node *right ;
 };
 
-template<typename T>
+
 class Binary_tree{
 public:
     Binary_tree();
-    Binary_tree(Node<T> *root_node);
-    void Inorder_tree_walk(Node<T> *x);
-    void Preorder_tree_walk(Node<T> *x);
-    void Postorder_tree_walk(Node<T> *x);
-    Node<T>* Tree_search(Node<T> *x, T k);
-    Node<T>* Iterative_search(Node<T> *x, T k);
-    Node<T>* Tree_minimum(Node<T> *x);
-    Node<T>* Tree_maximum(Node<T> *x);
-    Node<T>* Tree_successor(Node<T> *x);
-    Node<T>* Tree_predeccessor(Node<T> *x);
-    void Insert(Node<T> *z);
-    Node<T>* Delete(Node<T> *z);
-    Node<T> *root;
+    Binary_tree(Node *root_node);
+    void Inorder_tree_walk(Node *x);
+    void Preorder_tree_walk(Node *x);
+    void Postorder_tree_walk(Node *x);
+    Node* Tree_search(Node *x, int k);
+    Node* Iterative_search(Node *x, int k);
+    Node* Tree_minimum(Node *x);
+    Node* Tree_maximum(Node *x);
+    Node* Tree_successor(Node *x);
+    Node* Tree_predeccessor(Node *x);
+    void Insert(Node *z);
+    Node* Delete(Node *z);
+    Node *root;
 
 };
 
