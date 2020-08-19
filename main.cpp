@@ -63,8 +63,18 @@ int main()
     predecessor_node = BTree.Tree_predeccessor(searched_node2);
     cout << "88's new predecessor :" << predecessor_node -> key << endl;
     BTree.Tree_predeccessor(searched_node1);
-    cout << "Delete root\n";
+    BTree.Inorder_tree_walk(BTree.root);
+    cout << "\nDelete root\n";
+    
     BTree.Delete(BTree.root);
-    cout<<"now root is " << BTree.root->key << endl;
+    BTree.Inorder_tree_walk(BTree.root);
+    cout<<"\nnow root is " << BTree.root->key << endl;
+    cout<<"Index search 1 : "<<BTree.Index_search(1)->key<<endl;
+    cout<<"Index search 2 : "<<BTree.Index_search(2)->key<<endl;
+    cout<<"Index search 3 : "<<BTree.Index_search(3)->key<<endl;
+    BTree.Inorder_tree_walk(BTree.root);
+
+    //cout<<"Index search 2 : "<<BTree.Index_search(7)->key<<endl;
+    //cout<<"Index search 3 : "<<BTree.Index_search(3)->key<<endl;
    
 }

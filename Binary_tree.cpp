@@ -1,4 +1,5 @@
 #include"Binary_tree.h"
+#include<vector>
 #include<iostream>
 using namespace std;
 
@@ -48,6 +49,31 @@ Node* Binary_tree::Tree_search(Node *x, int k){
     }else{
         return Tree_search(x->right, k);
     }
+}
+
+Node* Binary_tree::Index_search(int ind){
+    vector<bool> vec;
+    for(; ind>1; ind/=2){
+        if(ind%2 == 1){
+            vec.push_back(1);
+        }else{
+            vec.push_back(0);
+        }
+    }
+    Node* pt = root;
+    while(vec.size() > 0){
+        bool tmp = vec[vec.size()-1];
+        vec.pop_back();
+        if(tmp == 0){
+            pt = pt->left;
+        }else{
+            pt = pt->right;
+        }
+    }
+    if(pt == 0){
+        cout<<"This index is out of range.\n";
+    }
+    return pt;
 }
 
 Node* Binary_tree::Iterative_search(Node *x, int k){
@@ -116,10 +142,13 @@ void Binary_tree::Insert(Node *z){
     z->p = y ;
     if(y == 0){
         root = z;
+        root->index = 1;
     }else if(z->key < y->key){
         y->left = z;
+        z->index = 2 * y->key ;
     }else{
         y->right = z;
+        z->index = 2 * y->key + 1;
     }
 }
 
@@ -140,6 +169,7 @@ Node* Binary_tree::Delete(Node *z){
     }
     if(y->p == 0){
         root = x;
+        root->index = 1;
     }else if(y == y->p->left){
         y->p->left = x;
     }else{
@@ -147,10 +177,26 @@ Node* Binary_tree::Delete(Node *z){
     }
     if(y != z){
         z->key = y->key;
-        z->p = y->p;
-        z->left = y->left;
-        z-> right = y->right;
     }
+    if(x == root){
+        Re_index(x);
+    }else{
+        Re_index(x->p);
+    }
+   
+    
     return y;
+}
+void Binary_tree::Re_index(Node *x){
+    if(x == 0)return;
+    x->index = 1;
+    if(x->left != 0){
+        x->left->index = 2 * x->index ;
+    }
+    if(x->right != 0){
+        x->right->index = 2 * x->index + 1;
+    }
+    Re_index(x->left);
+    Re_index(x->right);
 }
 

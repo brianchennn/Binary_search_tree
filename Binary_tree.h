@@ -8,10 +8,12 @@ class Node{
 public:
     Node(){
         p = 0;
+        index = 0;
         left = 0;
         right = 0;
     };
     int key;
+    int index;
     Node *p ;
     Node *left ;
     Node *right ;
@@ -26,6 +28,7 @@ public:
     void Preorder_tree_walk(Node *x);
     void Postorder_tree_walk(Node *x);
     Node* Tree_search(Node *x, int k);
+    Node* Index_search(int ind);
     Node* Iterative_search(Node *x, int k);
     Node* Tree_minimum(Node *x);
     Node* Tree_maximum(Node *x);
@@ -33,6 +36,7 @@ public:
     Node* Tree_predeccessor(Node *x);
     void Insert(Node *z);
     Node* Delete(Node *z);
+    void Re_index(Node *z);
     Node *root;
 
 };
